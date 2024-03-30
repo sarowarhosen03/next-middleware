@@ -18,20 +18,15 @@ import {
   setMiddleware,
 } from "@sarowarhosen03/nextjs-middleware";
 import { NextResponse } from "next/server";
-setMiddleware("/products/:id", (req) => {
-  console.log("hi im from user");
-  return NextResponse.json({ message: "Hello from /user" });
-});
 
-export function middleware(request) {
-  return nextMiddleware(request);
-}
-import { NextResponse } from "next/server";
 setMiddleware("/user/:id", (req) => {
   console.log("hi im from user");
   return NextResponse.json({ message: "Hello from /user" });
 });
-
+setMiddleware("/admin/", (req) => {
+  console.log("hi im from admin");
+  return NextResponse.json({ message: "you need to login first" });
+});
 export function middleware(...args) {
   return nextMiddleware(...args);
 }
