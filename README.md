@@ -10,6 +10,9 @@ npm install @sarowarhosen03/nextjs-middleware
 
 ## Usage
 
+thanks [path to regex](https://www.npmjs.com/package/path-to-regex) now @sarowarhosen03/nextjs-middleware will support every string path pettern those supported by path to regex . such as for dynamic path `/:local/blog` which will match like `/en/blog`  `/bn/blog  `or   `"/:lang/blog/:rest*"` which will match  `/en/blog/anything` `/en/blog/anything/everything`  
+
+
 at middleware.js
 
 ```javascript
