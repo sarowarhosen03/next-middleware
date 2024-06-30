@@ -3,9 +3,14 @@ import {
   setMiddleware,
 } from "@sarowarhosen03/nextjs-middleware";
 import { NextResponse } from "next/server";
-setMiddleware("/user/:id", (req) => {
-  console.log("hi im from user");
-  return NextResponse.json({ message: "Hello from /user" });
+
+//will match /en/blog;
+setMiddleware("/:local/blog", (req) => {
+  return NextResponse.json({ message: `Hello from  ${req.nextUrl.pathname}` });
+});
+//will match /en/blog/post-title/comment1/;
+setMiddleware("/:local/blog/*", (req) => {
+  return NextResponse.json({ message: `Hello from  ${req.nextUrl.pathname}` });
 });
 
 export function middleware(...args) {
