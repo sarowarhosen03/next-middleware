@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { pathToRegexp } from "path-to-regexp";
 
 type routesType = {
   [key: string]: Function;
@@ -11,13 +12,8 @@ export function setMiddleware(path: string, callback: Function) {
 
 export function nextMiddleware(req: NextRequest, ...args: any[]) {
   const path = req.nextUrl.pathname;
-  // Check if the path matches any defined route
   for (let route in routes) {
-    const pattern = new RegExp(
-      "^" + route.replace(/:[^\s/]+/g, "([\\w-]+)").replace(/\*/g, ".*") + "$"
-    );
-    if (pattern.test(path)) {
-      // If there's a match, execute the corresponding callback function
+    if (pathToRegexp(route).test(path)) {
       return routes?.[route]?.(req, ...args);
     }
   }

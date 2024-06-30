@@ -24,6 +24,7 @@ __export(nextjs_middleware_exports, {
   setMiddleware: () => setMiddleware
 });
 module.exports = __toCommonJS(nextjs_middleware_exports);
+var import_path_to_regexp = require("path-to-regexp");
 var routes = {};
 function setMiddleware(path, callback) {
   routes[path] = callback;
@@ -31,10 +32,7 @@ function setMiddleware(path, callback) {
 function nextMiddleware(req, ...args) {
   const path = req.nextUrl.pathname;
   for (let route in routes) {
-    const pattern = new RegExp(
-      "^" + route.replace(/:[^\s/]+/g, "([\\w-]+)").replace(/\*/g, ".*") + "$"
-    );
-    if (pattern.test(path)) {
+    if ((0, import_path_to_regexp.pathToRegexp)(route).test(path)) {
       return routes?.[route]?.(req, ...args);
     }
   }

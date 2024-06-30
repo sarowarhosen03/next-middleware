@@ -1,4 +1,5 @@
 // nextjs-middleware/index.ts
+import { pathToRegexp } from "path-to-regexp";
 var routes = {};
 function setMiddleware(path, callback) {
   routes[path] = callback;
@@ -6,10 +7,7 @@ function setMiddleware(path, callback) {
 function nextMiddleware(req, ...args) {
   const path = req.nextUrl.pathname;
   for (let route in routes) {
-    const pattern = new RegExp(
-      "^" + route.replace(/:[^\s/]+/g, "([\\w-]+)").replace(/\*/g, ".*") + "$"
-    );
-    if (pattern.test(path)) {
+    if (pathToRegexp(route).test(path)) {
       return routes?.[route]?.(req, ...args);
     }
   }

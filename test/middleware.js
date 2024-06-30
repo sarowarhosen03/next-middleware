@@ -1,4 +1,7 @@
-import { nextMiddleware, setMiddleware } from "@sarowarhosen03/nextjs-middleware";
+import {
+  nextMiddleware,
+  setMiddleware,
+} from "@sarowarhosen03/nextjs-middleware";
 import { NextResponse } from "next/server";
 setMiddleware("/user/:id", (req) => {
   console.log("hi im from user");
